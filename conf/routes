@@ -1,0 +1,14 @@
+GET        /                       controllers.HomeController.index
+
+->         /v1/posts               v1.post.PostRouter
+
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file        controllers.Assets.at(path="/public", file)
+
+GET         /tasks                          v1.task.TaskController.getAll
+POST        /tasks/:id/:subject/:status     v1.task.TaskController.addTask(id:String,subject:String,status:Int)
+GET         /tasks/:id                      v1.task.TaskController.getTaskById(id:String)
+PUT         /tasks/:id/:subject             v1.task.TaskController.updateTask(id:String,subject:String)
+PUT         /tasks/:id/:status              v1.task.TaskController.updateStatus(id:String,status:String)
+
+
