@@ -3,14 +3,16 @@ package v1.task
 import java.sql.Statement
 
 import play.api.db.Databases
-import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import play.api.libs.json._
 
 import scala.collection.immutable.Map
 
 
 //Model
 case class Task(id:String,subject:String,status:Int)
+
+
 
 //task model
 object Task{
@@ -19,6 +21,9 @@ object Task{
       (JsPath \ "subject").write[String] and
       (JsPath \ "status").write[Int]
     )(unlift(Task.unapply))
+
+
+
 
   def getTask(): Seq[JsValue] = {
     val stmt = connect()
@@ -32,7 +37,11 @@ object Task{
     subjects
   }
 
-  def addTask(id:String,subject:String,status:Int){}
+  def addTask(id:String,subject:String,status:Int): Unit ={
+    val stmt = connect()
+    stmt.executeUpdate("INSERT INTO Task " + "VALUES (" + id + ", '" + subject + "', '" + status + "')")
+    stmt.close()
+  }
   def getTaskById(id:String){}
   def updateTask(id:String,subject:String){}
   def updateStatus(id:String,status:Int){}

@@ -2,7 +2,7 @@ import sbt.Keys._
 
 lazy val GatlingTest = config("gatling") extend Test
 
-scalaVersion in ThisBuild := "2.12.6"
+scalaVersion in ThisBuild := "2.11.8"
 
 crossScalaVersions := Seq("2.11.12", "2.12.6")
 
@@ -18,9 +18,12 @@ libraryDependencies += "net.logstash.logback" % "logstash-logback-encoder" % "4.
 libraryDependencies += "com.netaporter" %% "scala-uri" % "0.4.16"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.1"
 
-//mysql connector
-libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.27"
-libraryDependencies ++= Seq(evolutions, jdbc)
+libraryDependencies ++= Seq(
+  "net.liftweb" %% "lift-webkit" % "2.6.3",
+  "net.liftweb" %% "lift-record" % "2.6.3",
+  "mysql" % "mysql-connector-java" % "5.1.27",
+  jdbc
+)
 
 // The Play project itself
 lazy val root = (project in file("."))
